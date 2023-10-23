@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/imgs/loteria.png" type="image/x-icon">
+    <title>Resultados de Lotería</title>
+    <link rel="stylesheet" href="/css/index.css" />
+</head>
+
+<body>
+    <div>
+        <h1 class="title-page">Resultados Lotería y Sorteos en Colombia</h1>
+    </div>
+    <div>
+        <h2>Loterías</h2>
+        <form id="loteriaButtons">
+            <% results.loteria.nameLot.forEach(result=> { %>
+                <a href="/" type="button" data-href="<%= result.lotHref %>" data-name="<%= result.lotName.split(' ').join('-').toLowerCase().replace(/[áéíóú]/g, function(match) {
+                    const replacements = {
+                    'á': 'a',
+                    'é': 'e',
+                    'í': 'i',
+                    'ó': 'o',
+                    'ú': 'u'
+                    };
+                    return replacements[match];
+                }) %>">
+                    <%= result.lotName %>
+                </a>
+                <% }); %>
+        </form>
+    </div>
+    <div>
+        <h2>Sorteos</h2>
+        <form id="sorteosButtoms">
+            <% results.loteria.nameSorteo.forEach(result=> { %>
+                <a href="/" type="button" data-href="<%= result.lotHref %>" data-name="<%= result.lotName.split(' ').join('-').toLowerCase().replace(/[áéíóú]/g, function(match) {
+                    const replacements = {
+                    'á': 'a',
+                    'é': 'e',
+                    'í': 'i',
+                    'ó': 'o',
+                    'ú': 'u'
+                    };
+                    return replacements[match];
+                }) %>">
+                    <%= result.lotName %>
+                </a>
+                <% }); %>
+        </form>
+    </div>
+    <div class="results">
+        <% for (let loteria in results) { %>
+            <% if (results.hasOwnProperty(loteria)) { %>
+                <div>
+                    <h2 id="loteria-name">Motilón Noche</h2>
+                    <ul>
+                        <% results[loteria].numbers.forEach((num) => { %>
+                            <li><%= num %></li>
+                        <% }) %>
+                    </ul>
+                </div>
+            <% } %>
+        <% } %>
+    </div>
+    <div class="luckiest"></div>
+    <footer>
+        <p>Desarrollador: Henry CB</p>
+    </footer>
+    <script src="/js/index.js"></script>
+</body>
+
+</html>
